@@ -22,7 +22,14 @@
 *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 *	SOFTWARE.
 **/
-
+/**
+ |-------------------------------------------------------------------------|
+ | AppOOP Version
+ |-------------------------------------------------------------------------|
+ | @var string
+ |-------------------------------------------------------------------------|
+ */
+	define('APPOOP_VERSION', '0.0.1');
 /*
 |--------------------------------------------------------------------------|
 | Sistema multi lenguaje
@@ -62,3 +69,20 @@ switch ($lang) {
 
 }
 include_once (__ROOT__.DS."sistema".DS."idioma".DS.$lang_file);
+
+/*
+|--------------------------------------------------------------------------|
+| Carga automática Clases
+|--------------------------------------------------------------------------|
+*/
+function __autoload($className) {
+	if (file_exists(__ROOT__ . DS . 'sistema' . DS . 'librerias' . DS . strtolower($className) . '.class.php')) {
+		require_once(__ROOT__ . DS . 'sistema' . DS . 'librerias' . DS . strtolower($className) . '.class.php');
+	}
+}
+$connect	= new Connection();
+$mensaje	= new Mensajes();
+$register	= new Users();
+$account	= new Users();
+$notas		= new Notas();
+$noticias	= new Noticias();
